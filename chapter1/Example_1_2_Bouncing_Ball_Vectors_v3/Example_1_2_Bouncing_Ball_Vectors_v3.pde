@@ -6,12 +6,25 @@
 //Instead of a bunch of floats, we now just have two variables.
 // modified by CN 031525
 
-int num=100;
-Ball balls[];
+PFont f;
+float stop;
+boolean isStopSet = false;
+
+void setStop(float value) {
+  if (!isStopSet) {
+    stop = value;
+    isStopSet = true;
+  }
+}
+
+int num=5;
+float maxDist = 20;
+ArrayList<Ball> balls;
 
 void setup() {
   size(640, 360);
-  balls = new Ball[num];
+  f = createFont("Serif", 16, true); // Create Font
+  balls = new ArrayList<Ball>();
   //Note how PVector() has to be called inside of setup().
   for (int i=0; i<num; i++) {
     float dia = (float)(Math.random()*20)+20;
@@ -23,14 +36,33 @@ void setup() {
       (float)Math.random()*255,
       (float)Math.random()*255
       );
-    balls[i] = new Ball(px, py, vx, vy, dia, clr);
+    Ball aBall = new Ball(px, py, vx, vy, dia, clr);
+    balls.add(aBall);
   }
 }
 
 void draw() {
   background(255);
-  for (int i=0; i<num; i++) {
-    Ball b = balls[i];
+  // Remove any dead balls
+  for (int i = balls.size()-1; i >= 0; i--) {
+    Ball b = balls.get(i);
+    if (!b.liv) balls.remove(b);
+  }
+
+  if ( balls.size() <= 0) {
+    setStop(millis());
+    textFont(f, 16);
+    fill(255, 0, 0);
+    text("You got'em all in " + stop/1000 + " seconds !!", 10, 100);
+  } else {
+    textFont(f, 16);
+    fill(255, 0, 255);
+    String s = "Click inside a Ball to remove it: " + balls.size() + " remaining";
+    text(s, 10, 100);
+  }
+
+  for (int i=0; i<balls.size(); i++) {
+    Ball b = balls.get(i);
     b.pos.add(b.vel);
 
     //We still sometimes need to refer to the individual components of a PVector and can do so using the dot syntax: position.x, velocity.y, etc.
@@ -45,5 +77,16 @@ void draw() {
     fill(b.clr);
     strokeWeight(2);
     circle(b.pos.x, b.pos.y, b.dia);
+  }
+}
+
+void mouseClicked() {
+  float mx = mouseX;
+  float my = mouseY;
+  for (int i=0; i<balls.size(); i++) {
+    Ball b = balls.get(i);
+    if (dist(mx, my, b.pos.x, b.pos.y) <= maxDist) {
+      b.liv = false;
+    }
   }
 }

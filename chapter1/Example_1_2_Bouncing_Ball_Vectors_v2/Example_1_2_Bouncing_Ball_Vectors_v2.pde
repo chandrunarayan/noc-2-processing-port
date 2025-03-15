@@ -6,7 +6,8 @@
 //Instead of a bunch of floats, we now just have two variables.
 // modified by CN 031525
 
-int num=100;
+int num=10;
+float maxDist = 20;
 Ball balls[];
 
 void setup() {
@@ -41,9 +42,20 @@ void draw() {
       b.vel.y *= -1;
     }
 
-    stroke(0);
+    stroke(255);
     fill(b.clr);
-    strokeWeight(2);
+    //strokeWeight(2);
     circle(b.pos.x, b.pos.y, b.dia);
+  }
+}
+
+void mouseClicked() {
+  float mx = mouseX;
+  float my = mouseY;
+  for (int i=0; i<num; i++) {
+    Ball b = balls[i];
+    if (dist(mx, my, b.pos.x, b.pos.y) <= maxDist) {
+      b.clr = color(255.255,255);
+    }
   }
 }
