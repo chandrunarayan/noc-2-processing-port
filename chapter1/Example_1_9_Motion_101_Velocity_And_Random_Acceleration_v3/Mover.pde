@@ -8,13 +8,16 @@ class Mover{
   PVector pos, vel, acc;
   float topSpeed, dia;
   color clr;
+  boolean liv;
   
   Mover(){
     float d = (float)(Math.random()*20)+20;
     float px = (float)Math.random()*(width-dia)+dia/2;
     float py = (float)Math.random()*(height-dia)+dia/2;
-    float vx = (float)(Math.random()*4)-1.5;
+    float vx = (float)(Math.random()*3)-1.0;
     float vy = (float)(Math.random()*3)-1.0;
+    float ax = (float)(Math.random()*3)-1.0;
+    float ay = (float)(Math.random()*3)-1.0;
     color c = color((float)Math.random()*255,
       (float)Math.random()*255,
       (float)Math.random()*255
@@ -22,9 +25,10 @@ class Mover{
     dia = d;
     clr = c;
     pos = new PVector(px, py);
-    vel = new PVector(vx, vy);
-    this.acc = new PVector();
-    this.topSpeed = 5;
+    vel = new PVector(vx/2, vy/2);
+    acc = new PVector(ax/2, ay/2);
+    liv = true;
+    this.topSpeed = 2.0;
   }
 
   void update() {
