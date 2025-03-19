@@ -5,6 +5,7 @@
 ArrayList<Mover> movers;
 PFont f;
 int num=100;
+int maxSz = 50;
 
 void setup() {
   size(640, 360);

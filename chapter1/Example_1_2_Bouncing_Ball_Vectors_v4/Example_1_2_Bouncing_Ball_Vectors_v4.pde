@@ -9,8 +9,9 @@
 PFont f;
 float stop;
 boolean isStopSet = false;
-int num=5;
+int num=10;
 float maxDist = 20;
+float maxSz = 50;
 ArrayList<Ball> balls;
 
 void setup() {

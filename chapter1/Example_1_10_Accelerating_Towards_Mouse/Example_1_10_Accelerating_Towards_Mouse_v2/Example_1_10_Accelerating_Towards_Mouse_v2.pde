@@ -4,11 +4,10 @@
 
 ArrayList<Mover> movers;
 PFont f;
-int num=5;
+int num=100;
 boolean isStopSet = false;
 float stop;
 float maxDist = 20;
-int maxSz = 50;
 
 void setup() {
   size(640, 360);

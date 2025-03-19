@@ -5,7 +5,7 @@ class Ball {
   color clr;
   boolean liv;
   Ball() {
-    float d = (float)(Math.random()*20)+20;
+    float d = (float)(Math.random()*20)+(float)(Math.random())*maxSz;
     float px = (float)Math.random()*(width-dia)+dia/2;
     float py = (float)Math.random()*(height-dia)+dia/2;
     float vx = (float)(Math.random()*4)-1.5;

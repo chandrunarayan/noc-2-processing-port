@@ -11,7 +11,7 @@ class Mover{
   boolean liv;
   
   Mover(){
-    float d = (float)(Math.random()*20)+(float)(Math.random())*maxSz;
+    float d = (float)(Math.random()*5)+(float)Math.random()*20;
     float px = (float)Math.random()*(width-dia)+dia/2;
     float py = (float)Math.random()*(height-dia)+dia/2;
     float vx = (float)(Math.random()*3)-1.0;
@@ -32,8 +32,15 @@ class Mover{
   }
 
   void update() {
+    PVector mouse = new PVector(mouseX, mouseY);
+    // Step 1: Compute direction
+    PVector dir = PVector.sub(mouse, this.pos);
+    
     // The random2D() function returns a unit vector pointing in a random direction.
-    this.acc = PVector.random2D();
+    // this.acc = PVector.random2D();
+    dir.normalize();
+    dir.mult(0.2);
+    this.acc = dir;
     this.acc.mult(random(2));
 
     this.vel.add(this.acc);

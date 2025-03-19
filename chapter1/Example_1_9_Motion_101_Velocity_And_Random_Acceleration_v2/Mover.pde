@@ -10,7 +10,7 @@ class Mover{
   color clr;
   
   Mover(){
-    float d = (float)(Math.random()*20)+20;
+    float d = (float)(Math.random()*5)+(float)Math.random()*maxSz;
     float px = (float)Math.random()*(width-dia)+dia/2;
     float py = (float)Math.random()*(height-dia)+dia/2;
     float vx = (float)(Math.random()*4)-1.5;
@@ -41,7 +41,7 @@ class Mover{
     stroke(0);
     strokeWeight(2);
     fill(clr);
-    circle(this.pos.x, this.pos.y, 48);
+    circle(this.pos.x, this.pos.y, dia);
   }
 
   void checkBounce() {
