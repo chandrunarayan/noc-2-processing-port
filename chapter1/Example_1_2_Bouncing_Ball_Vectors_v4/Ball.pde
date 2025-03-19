@@ -20,4 +20,26 @@ class Ball {
     clr = c;
     liv = true;
   }
+  
+  void checkBounce() {
+    //We still sometimes need to refer to the individual components of a PVector and can do so using the dot syntax: position.x, velocity.y, etc.
+    if (pos.x > width-dia/2 || pos.x < dia/2) {
+      vel.x *= -1;
+    }
+    if (pos.y > height-dia/2 || pos.y < dia/2) {
+      vel.y *= -1;
+    }    
+  }
+  
+  void show() {
+    stroke(0);
+    fill(clr);
+    strokeWeight(2);
+    circle(pos.x, pos.y, dia);    
+  }
+  
+  void update() {
+        pos.add(vel);
+  }
+
 }
